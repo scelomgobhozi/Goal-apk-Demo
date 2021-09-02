@@ -63,7 +63,7 @@ $pdo = new PDO($dns,$username,$password);
 $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql = "DELETE FROM  $dbname.goal_list WHERE id= :id LIMIT 1";
 $stmt = $pdo->prepare($sql);
-$stmt->execute(['id'=> $id]);
+$stmt->execute();
 
 }
 

@@ -9,20 +9,25 @@ session_start();
 
 // if(isset($_GET['id_edit'])){
     
-
-$idget = $_GET['id_edit'];
-$_SESSION['id'] = $idget;
+$idget = [];
+// $idget = $_GET['id_edit'];
+// $_SESSION['id'] = $idget;
 // print_r($id);
-// array_push($idset,$idget);
+
+if (isset($_GET['id_edit'])) {
+ $idset = $_GET['id_edit']; 
+ array_push($idget,$idset);
+}
 
 
+if(isset($_POST['update'])){
 
-if(isset($_POST['update']) ){
+$id = $idget[0];
+echo $id;
+// print_r($_SESSION['id']);
 
+// echo "The real id is";
 
-print_r($_SESSION['id']);
-
-echo "The real id is";
 
 $newHeader = $_POST['header2'];
 $newBody = $_POST['description2'];
@@ -31,16 +36,21 @@ $newDate = $_POST['date2'];
 // echo $newHeader."<br>".$newBody."<br>".$newDate;
 
 try{
-$id = $_GET['id'];
+// $id = $_GET['id'];
 $dns = 'mysql:host='.$host.';dbname'.$dbname;
 $pdo = new PDO($dns,$username,$password);
 $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "UPDATE  $dbname.goal_list SET header = :newHeader body = :newBody due_date = :newDate WHERE id = :id ";
+
+$sql = "UPDATE $dbname.goal_list SET header = :newHeader, body = :newBody , due_date = :newDate WHERE id = :id";
 $stmt = $pdo->prepare($sql);
-$stmt->execute(['id'=> $_SESSION['id'] , 'header'=>$newHeader , 'body'=>$newBody , 'due_date'=>$newDate]);
+$stmt->execute(['id'=> $id, 'newHeader'=>$newHeader, 'newBody'=>$newBody,'newDate'=>$newDate]);
+
+
+
 
 } catch(PDOException $e) {
-    echo $sql . "<br>" . $e->getMessage();
+  //$sql . "<br>" . 
+    echo $e->getMessage();
   }
     
 }

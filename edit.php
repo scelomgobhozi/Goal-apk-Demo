@@ -1,39 +1,58 @@
 <?php 
 
 include "db.php"; 
-session_start();
-
-// $bno = 11;
-// $idset = [];
 
 
-// if(isset($_GET['id_edit'])){
-    
-$idget = [];
-// $idget = $_GET['id_edit'];
-// $_SESSION['id'] = $idget;
-// print_r($id);
+
+$GLOBALS['id'];
+$id = "";
+
+
+
 
 if (isset($_GET['id_edit'])) {
- $idset = $_GET['id_edit']; 
- array_push($idget,$idset);
+
+  $id_edit = $_GET['id_edit'];
+
+  try{
+
+    $dns = 'mysql:host='.$host.';dbname'.$dbname;
+    $pdo = new PDO($dns,$username,$password);
+    $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    $sql2 ="SELECT * FROM $dbname.goal_list WHERE id = ?";
+
+    $stmt2 = $pdo->prepare($sql2);
+    //echo  gettype($stmt2);
+    $stmt2->execute([$id_edit]);
+
+
+   $info = $stmt2->fetch();
+   $id = $info['id'];
+  
+    
+    
+    
+    } catch(PDOException $e) {
+      
+        echo $e->getMessage();
+      }
+        
+    
 }
 
 
 if(isset($_POST['update'])){
+echo "Hello";
 
-$id = $idget[0];
 echo $id;
-// print_r($_SESSION['id']);
-
-// echo "The real id is";
 
 
 $newHeader = $_POST['header2'];
 $newBody = $_POST['description2'];
 $newDate = $_POST['date2'];
 
-// echo $newHeader."<br>".$newBody."<br>".$newDate;
+
 
 try{
 // $id = $_GET['id'];
@@ -49,14 +68,14 @@ $stmt->execute(['id'=> $id, 'newHeader'=>$newHeader, 'newBody'=>$newBody,'newDat
 
 
 } catch(PDOException $e) {
-  //$sql . "<br>" . 
+  
     echo $e->getMessage();
   }
     
 }
 
 
-//}
+
 
 
 
@@ -75,7 +94,7 @@ $stmt->execute(['id'=> $id, 'newHeader'=>$newHeader, 'newBody'=>$newBody,'newDat
 <body>
     
 
-<form action="edit.php" method="POST">
+<form action="edit.php?id_edit=<?php echo $id ?>" method="POST">
 
 <div> 
 <label for="">Header</label>

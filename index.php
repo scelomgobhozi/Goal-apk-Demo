@@ -2,7 +2,7 @@
 use Componere\Value;
 
 include "db.php";
-
+include "delete.php"
 ?>
 
 
@@ -14,6 +14,7 @@ include "db.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -47,9 +48,25 @@ while ($row = $stmt->fetch()) { ?>
 <h1> <?php  echo "Were underway";  ?> </h1> 
 <form action="index.php" method="get">
 <input type="submit"   name="click" value="Click Me" id="<?php echo $id = $row['id'] ?>">
+
 </form>
-<a href="index.php?id=<?php echo $row['id'] ?>">Click2</a>
+
+<div class="confirm" id="confirm">
+
+<p>Are sure you would like to delete the goal</p>
+<a href="index.php">No</a>
+
+<form action="index.php?id_delete=<?php echo $row['id'] ?>" method="post">
+<input type="submit" value="Yes" name="delete">
+</form>
+
+
+</div>
+
+
+<a href="index.php?id=<?php echo $row['id'] ?>"></a>
 <a href="edit.php?id_edit=<?php echo $row['id'] ?>">Edit</a>   
+
 <h1> <?php echo $row['id'];  ?>  </h1>
 <h1> <?php echo $row['header'];  ?>  </h1>
 
@@ -79,5 +96,7 @@ echo "Nothing is happening";
 $number = cal_days_in_month(CAL_GREGORIAN, 2, 2021);
 echo $number;
  ?>  
+
+ <script src="index.js"></script>
 </body>
 </html>

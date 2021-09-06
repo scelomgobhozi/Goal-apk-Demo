@@ -1,0 +1,8 @@
+.confirm{
+background-color: aquamarine;
+width: 50%;
+}
+
+.confirm button{
+ display: inline-block;   
+}

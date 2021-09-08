@@ -1,8 +1,47 @@
-.confirm{
-background-color: aquamarine;
-width: 50%;
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400&display=swap');
+*{
+margin:0;
+padding:0;    
 }
 
-.confirm button{
+
+
+
+.con-container{
+height: 250px;
+width: 270px;    
+background-color: rgb(60, 224, 109);
+border-radius: 10px;
+text-align: center;
+
+margin: 10% auto 0 ;
+display: none; 
+}
+
+.confirmation{
+padding: 45px 25px 0 25px;   
+
+}
+
+.confirmation .btn-container{
  display: inline-block;   
+ margin-top: 3rem;
+}
+
+.confirmation p{
+font-family: 'Urbanist', sans-serif;
+
+}
+.btn-yes{
+ margin-left: 40px;   
+}
+
+.btn-container button,input{
+padding:5px;
+border: none;
+border-radius: 5px;
+background-color: white;
+
+
+
 }

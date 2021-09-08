@@ -46,27 +46,52 @@ $stmt->execute();
         
 while ($row = $stmt->fetch()) { ?>
 <h1> <?php  echo "Were underway";  ?> </h1> 
-<form action="index.php" method="get">
+<form action="index.php" method="POST">
 <input type="submit"   name="click" value="Click Me" id="<?php echo $id = $row['id'] ?>">
 
 </form>
 
-<div class="confirm" id="confirm">
+<!-- ---------------DELETE CONFIRMATION CONTAINER---- -->
 
-<p>Are sure you would like to delete the goal</p>
-<a href="index.php">No</a>
+<div class="conf-wrap">
+      <div id="con-container" class="con-container">
+        <div class="confirmation">
+          <div></div>
 
-<form action="index.php?id_delete=<?php echo $row['id'] ?>" method="post">
-<input type="submit" value="Yes" name="delete">
-</form>
+          <div class="text-container">
+            <p>Are you sure you want to delete this Goal ?</p>
+          </div>
+
+          <div class="btn-container"><button>No</button></div>
+          <div class="btn-container btn-yes">
+            <input type="submit" value="Yes" />
+          </div>
+        </div>
+      </div>
 
 
-</div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button id="confirm">Delete</button>
 <a href="index.php?id=<?php echo $row['id'] ?>"></a>
-<a href="edit.php?id_edit=<?php echo $row['id'] ?>">Edit</a>   
+<a href="edit.php?id_edit=<?php echo $row['id'] ?>">Edit</a>  
 
+
+<!-- <form action="delete.php?goal_id=<phP echo $row['id'] ?>" method="post">  <input type="submit" value="Delete" name="delete"></form> -->
 <h1> <?php echo $row['id'];  ?>  </h1>
 <h1> <?php echo $row['header'];  ?>  </h1>
 

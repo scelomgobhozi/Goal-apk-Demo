@@ -4,7 +4,7 @@ include "db.php";
 
 
 
-$GLOBALS['id'];
+// $GLOBALS['id'];
 $id = "";
 
 
@@ -70,11 +70,23 @@ $stmt->execute(['id'=> $id, 'newHeader'=>$newHeader, 'newBody'=>$newBody,'newDat
 } catch(PDOException $e) {
   
     echo $e->getMessage();
+
   }
-    
+
+?>
+<script>
+alert('You have successfully updated your goal');
+
+</script>
+
+<?php
+
+header("location:index.php");     
 }
 
 
+
+ 
 
 
 

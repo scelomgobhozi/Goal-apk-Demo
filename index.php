@@ -3,6 +3,30 @@ use Componere\Value;
 
 include "db.php";
 include "delete.php"
+
+?>
+<script>
+
+window.addEventListener('load', function() {
+    
+ let numberOfConfirmBtn = document.querySelectorAll(".confirm").length;
+
+ for(var i =0; i<numberOfConfirmBtn; i++){
+  document.querySelectorAll(".confirm")[i].addEventListener("click", change);  
+ }
+    
+    
+ function change(){
+  console.log("I have been clicked");   
+  document.getElementById("con-container").style.display = "inherit"; 
+}   
+    
+});
+
+
+    
+</script>
+<?php
 ?>
 
 
@@ -14,6 +38,7 @@ include "delete.php"
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -51,23 +76,31 @@ while ($row = $stmt->fetch()) { ?>
 
 </form>
 
-<!-- ---------------DELETE CONFIRMATION CONTAINER---- -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+Delete
+</button>
 
-<div class="conf-wrap">
-      <div id="con-container" class="con-container">
-        <div class="confirmation">
-          <div></div>
-
-          <div class="text-container">
-            <p>Are you sure you want to delete this Goal ?</p>
-          </div>
-
-          <div class="btn-container"><button>No</button></div>
-          <div class="btn-container btn-yes">
-            <input type="submit" value="Yes" />
-          </div>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        Are you sure you would like to delete the Goal
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -84,9 +117,7 @@ while ($row = $stmt->fetch()) { ?>
 
 
 
-
-
-<button id="confirm">Delete</button>
+<button class="confirm" id="confirm">Delete</button>
 <a href="index.php?id=<?php echo $row['id'] ?>"></a>
 <a href="edit.php?id_edit=<?php echo $row['id'] ?>">Edit</a>  
 
@@ -123,5 +154,8 @@ echo $number;
  ?>  
 
  <script src="index.js"></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
